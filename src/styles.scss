@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500&display=swap');
+
+* {
+  font-family: 'Inter Tight', sans-serif;
+}
+
+body {
+  font-family: 'Inter Tight', sans-serif;
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0 auto;
+    /* Estilo para el navegador Chrome/Edge */
+    .overflow-y-auto::-webkit-scrollbar {
+      width: 12px;
+    }
+  
+    .overflow-y-auto::-webkit-scrollbar-thumb {
+      background-color: #733456;
+      border-radius: 8px;
+    }
+  
+    /* Estilo para el navegador Firefox */
+    .overflow-y-auto {
+      scrollbar-color: #733456 #733456;
+    }
+}
+
+

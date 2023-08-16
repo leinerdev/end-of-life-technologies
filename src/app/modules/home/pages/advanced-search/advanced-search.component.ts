@@ -37,7 +37,7 @@ export class AdvancedSearchComponent implements OnInit {
     this.formSubmitted = true;
     this.isLoading = true;
     const { technology_name, technology_version } = this.technlogyForm.value;
-    this.endOfLifeService.getAllDetailsByProduct(technology_name, technology_version.toString()).subscribe({
+    this.endOfLifeService.getAllDetailsByProduct(technology_name.toLowerCase().trim(), technology_version.toString()).subscribe({
       next: (data) => {
         if (data.length === 0) {
           this.formSubmitted = false;

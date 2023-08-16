@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { EndOfLifeService } from 'src/app/core/services/end-of-life.service';
 import { ProductDetail } from '../../interfaces/product-detail.interface';
+import { IconfinderService } from 'src/app/core/services/iconfinder.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,11 +16,13 @@ export class ProductDetailComponent implements OnInit {
 
   isLoading: boolean = false;
   productData?: ProductDetail[] = [];
+  technologyImage: string = '';
 
   constructor(
     protected route: ActivatedRoute,
     protected navigator: Router,
-    protected endOfLifeService: EndOfLifeService
+    protected endOfLifeService: EndOfLifeService,
+    protected iconfinderService: IconfinderService
   ) {}
 
   ngOnInit(): void {
@@ -40,11 +43,16 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  loadProduct(product: string){
+  loadProduct(product: string) {
     this.endOfLifeService.getAllDetailsByProduct(product).subscribe({
       next: (data) => {
-        this.isLoading = false;
-        console.log(data);  
+        this.iconfinderService.getIconByParam(product).subscribe({
+          next: (res: any) => {
+            this.technologyImage = res.icons[0].raster_sizes[5].formats[0].preview_url;
+            this.isLoading = false;
+            console.log(res);
+          }
+        })
         this.productData = data;
       },
       error: (err: HttpErrorResponse) => {

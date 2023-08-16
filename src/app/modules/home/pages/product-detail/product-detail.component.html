@@ -1,7 +1,8 @@
 <section class="dark:bg-zinc-900">
   <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+    <img [src]="technologyImage" alt="">
     <div class="relative overflow-x-auto">
-      <div *ngIf="isLoading" role="status">
+      <div *ngIf="isLoading" role="status" class="flex justify-center">
         <svg
           aria-hidden="true"
           class="w-8 h-8 mr-2 text-primary-500 animate-spin dark:text-primary-500 fill-primary-600"

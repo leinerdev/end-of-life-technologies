@@ -1,7 +1,56 @@
 <section class="dark:bg-zinc-900">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-    <h2 class="font-semibold mb-6 bg-primary-500 text-white text-lg w-fit px-5 py-2 ">{{ technologyName | uppercase }}</h2>
-    <div class="relative overflow-x-auto">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+    <div class="max-w-screen-md mb-8 lg:mb-16">
+      <h2
+        class="mb-4 text-4xl tracking-tight font-extrabold text-zinc-900 dark:text-white"
+      >
+        Busca la tecnología que necesitas
+      </h2>
+
+      <form [formGroup]="technlogyForm" class="mt-10" (ngSubmit)="search()">
+        <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-6 group">
+            <input
+              type="text"
+              name="floating_first_name"
+              id="floating_first_name"
+              class="block py-2.5 px-0 w-full text-sm text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"
+              placeholder=" "
+              formControlName="technology_name"
+            />
+            <label
+              for="floating_first_name"
+              class="peer-focus:font-medium absolute text-sm text-zinc-500 dark:text-zinc-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >Nombre de la tecnología o lenguaje</label
+            >
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input
+              type="number"
+              name="floating_last_name"
+              id="floating_last_name"
+              class="block py-2.5 px-0 w-full text-sm text-zinc-900 bg-transparent border-0 border-b-2 border-zinc-300 appearance-none dark:text-white dark:border-zinc-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"
+              placeholder=" "
+              formControlName="technology_version"
+            />
+            <label
+              for="floating_last_name"
+              class="peer-focus:font-medium absolute text-sm text-zinc-500 dark:text-zinc-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >Número de versión (Opcional)</label
+            >
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+        >
+          Buscar
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="formSubmitted && !notResults" class="relative overflow-x-auto">
       <div *ngIf="isLoading" role="status" class="flex justify-center">
         <svg
           aria-hidden="true"
@@ -21,6 +70,7 @@
         </svg>
         <span class="sr-only">Cargando tecnologías...</span>
       </div>
+
       <table *ngIf="!isLoading" class="w-full text-sm text-lef text-zinc-500 dark:text-zinc-400">
         <thead
           class="text-xs text-white uppercase bg-primary-500 dark:bg-zinc-700 dark:text-zinc-200"
@@ -36,7 +86,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let productDetail of productData"
+            *ngFor="let productDetail of results"
             class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-700"
           >
             <th
@@ -65,5 +115,7 @@
         </tbody>
       </table>
     </div>
+
+    <span *ngIf="notResults" class="text-zinc-500 dark:text-zinc-400">No se encontraron resultados</span>
   </div>
 </section>

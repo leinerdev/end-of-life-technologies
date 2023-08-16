@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { AllTechnologiesComponent } from './pages/all-technologies/all-technologies.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdvancedSearchComponent } from './pages/advanced-search/advanced-search.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'all-technologies', component: AllTechnologiesComponent },
       { path: 'technology/:product', component: ProductDetailComponent },
+      { path: 'search-technology', component: AdvancedSearchComponent },
       { path: 'not-found', component: NotFoundComponent },
       { path: '**', redirectTo: 'all-technologies' },
     ]
